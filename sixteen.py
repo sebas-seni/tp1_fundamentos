@@ -46,7 +46,7 @@ def crear_tablero(n_filas: int, n_columnas: int) -> list[list[int]]:
     # print(tablero)
 
 
-print(crear_tablero(4, 5))
+# print(crear_tablero(3, 3))
 
 
 def rotar_izquierda(tablero: list[list[int]], fila: int) -> bool:
@@ -66,6 +66,13 @@ def rotar_izquierda(tablero: list[list[int]], fila: int) -> bool:
         - Si `fila` es un índice de filas válido, la función realiza la
         rotación modificando el tablero y devuelve `True`.
         Caso contrario, no modifica el tablero y devuelve `False`."""
+    
+    for fila in tablero:
+        for i in fila:
+            tablero[fila][-1] =  tablero[fila][i]
+
+
+
 
 
 def rotar_derecha(tablero: list[list[int]], fila: int) -> bool:

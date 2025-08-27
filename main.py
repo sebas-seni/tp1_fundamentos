@@ -43,7 +43,7 @@ def pedir_movimiento(mensaje: str) -> tuple[str, int] | None:
     while True:
         op = input(mensaje)
         if op == "q":
-            return None
+            return
 
         entrada = op.split(",")
         if len(entrada) != 2:
@@ -51,7 +51,7 @@ def pedir_movimiento(mensaje: str) -> tuple[str, int] | None:
             continue
 
         n, direccion = entrada
-        if not n.isdigit() or int(n) < 0:
+        if not n.isdigit() or not int(n) >= 0:
             print("El índice especificado no es un entero positivo")
             continue
 
@@ -83,10 +83,10 @@ def mostrar_tablero(tablero: list[list[int]]) -> None:
     print(" " * PAD + "|" + "|".join(indice))
     print(" " * PAD + "=" * len(tablero[0]) * (PAD + 1))
 
-    for fil, fila in enumerate(tablero):
+    for fil in range(len(tablero)):
         fila = []
-        for col, _ in enumerate(fila):
-            fila.append(str(fila[col]).center(PAD))
+        for col in range(len(tablero[fil])):
+            fila.append(str(tablero[fil][col]).center(PAD))
         print(str(fil).center(PAD) + "‖" + "|".join(fila))
 
 
@@ -146,7 +146,7 @@ def main() -> None:
     sixteen.mezclar_tablero(tablero)
     mostrar_tablero(tablero)
     while not sixteen.esta_ordenado(tablero):
-        print("Direcciones: w (arriba), a (abajo), s (izquierda), d (derecha)")
+        print(f"Direcciones: w (arriba), a (abajo), s (izquierda), d (derecha)")
         entrada = pedir_movimiento("Ingrese el movimiento <n, dir> o 'q' para salir: ")
         if not entrada:
             return
