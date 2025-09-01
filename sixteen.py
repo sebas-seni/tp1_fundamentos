@@ -46,7 +46,7 @@ def crear_tablero(n_filas: int, n_columnas: int) -> list[list[int]]:
     # print(tablero)
 
 
-# print(crear_tablero(3, 3))
+# print(crear_tablero(2, 4))
 
 
 def rotar_izquierda(tablero: list[list[int]], fila: int) -> bool:
@@ -66,13 +66,15 @@ def rotar_izquierda(tablero: list[list[int]], fila: int) -> bool:
         - Si `fila` es un índice de filas válido, la función realiza la
         rotación modificando el tablero y devuelve `True`.
         Caso contrario, no modifica el tablero y devuelve `False`."""
-    
-    for fila in tablero:
-        for i in fila:
-            tablero[fila][-1] =  tablero[fila][i]
 
+    if fila >= 0 and fila < 10:
+        aux = tablero[fila].pop(0)
 
+        tablero[fila].append(aux)
 
+        return True
+
+    return False
 
 
 def rotar_derecha(tablero: list[list[int]], fila: int) -> bool:
@@ -93,6 +95,15 @@ def rotar_derecha(tablero: list[list[int]], fila: int) -> bool:
         rotación modificando el tablero y devuelve `True`.
         Caso contrario, no modifica el tablero y devuelve `False`."""
 
+    if fila >= 0 and fila < 10:
+        aux = tablero[fila].pop(-1)
+
+        tablero[fila].insert(0, aux)
+
+        return True
+
+    return False
+
 
 def rotar_arriba(tablero: list[list[int]], columna: int) -> bool:
     """Rota la columna del tablero, indicada por el índice `columna`, hacia
@@ -112,6 +123,19 @@ def rotar_arriba(tablero: list[list[int]], columna: int) -> bool:
         rotación modificando el tablero y devuelve `True`.
         Caso contrario, no modifica el tablero y devuelve `False`."""
 
+    if columna >= 0 and columna < 10:
+
+        aux = tablero[0][columna]
+
+        for i in range(len(tablero) - 1):
+            tablero[i][columna] = tablero[i + 1][columna]
+
+        tablero[-1][columna] = aux
+
+        return True
+
+    return False
+
 
 def rotar_abajo(tablero: list[list[int]], columna: int) -> bool:
     """Rota la columna del tablero, indicada por el índice `columna`, hacia
@@ -130,6 +154,19 @@ def rotar_abajo(tablero: list[list[int]], columna: int) -> bool:
         - Si `columna` es un índice de columnas válido, la función realiza la
         rotación modificando el tablero y devuelve `True`.
         Caso contrario, no modifica el tablero y devuelve `False`."""
+
+    if columna >= 0 and columna < 10:
+
+        aux = tablero[-1][columna]  # 8
+
+        for i in range(len(tablero) - 1, 0, -1):
+            tablero[i][columna] = tablero[i - 1][columna]
+
+        tablero[0][columna] = aux
+
+        return True
+
+    return False
 
 
 def esta_ordenado(tablero: list[list[int]]) -> bool:

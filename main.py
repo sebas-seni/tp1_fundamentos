@@ -6,6 +6,7 @@ import sixteen
 
 PAD = 3
 
+
 def pedir_entero(mensaje: str) -> int:
     """Solicita al usuario un número entero positivo y valida la entrada.
 
