@@ -4,6 +4,8 @@ Logica del juego Sixteen
 
 import random
 
+ITERACIONES_RANDOM = 1
+
 
 def crear_tablero(n_filas: int, n_columnas: int) -> list[list[int]]:
     """
@@ -40,13 +42,8 @@ def crear_tablero(n_filas: int, n_columnas: int) -> list[list[int]]:
             fila.append(contador)
             contador += 1
         tablero.append(fila)
-        # print(fila, end="")
+
     return tablero
-
-    # print(tablero)
-
-
-# print(crear_tablero(2, 4))
 
 
 def rotar_izquierda(tablero: list[list[int]], fila: int) -> bool:
@@ -157,7 +154,7 @@ def rotar_abajo(tablero: list[list[int]], columna: int) -> bool:
 
     if columna >= 0 and columna < 10:
 
-        aux = tablero[-1][columna]  # 8
+        aux = tablero[-1][columna]
 
         for i in range(len(tablero) - 1, 0, -1):
             tablero[i][columna] = tablero[i - 1][columna]
@@ -180,6 +177,20 @@ def esta_ordenado(tablero: list[list[int]]) -> bool:
         - `tablero` es una lista de lista de enteros de cualquier dimensión.
         - Los elementos de `tablero` no tienen números repetidos.
     """
+    # filas_ordenadas = 0
+
+    # for fila in range(len(tablero) - 1):
+    #     if tablero[fila] == sorted(tablero[fila]):
+    #         filas_ordenadas += 1
+    #         if filas_ordenadas == len(tablero):
+    #             return True
+    #     return False
+    cant_filas = len(tablero)
+    cant_columnas = len(tablero[0])
+
+    tablero_ordenado = crear_tablero(cant_filas, cant_columnas)
+
+    return tablero == tablero_ordenado
 
 
 def mezclar_tablero(tablero: list[list[int]]):
@@ -191,3 +202,13 @@ def mezclar_tablero(tablero: list[list[int]]):
     PRECONDICIONES:
         - `tablero` es una lista de lista de enteros de cualquier dimensión.
     """
+
+    for i in range(ITERACIONES_RANDOM):
+        fila_random = random.randint(0, len(tablero) - 1)
+        columna_random = random.randint(0, len(tablero[0]) - 1)
+
+        rotar_izquierda(tablero, fila_random)
+        rotar_arriba(tablero, columna_random)
+        rotar_derecha(tablero, fila_random)
+        rotar_abajo(tablero, columna_random)
+    return tablero
